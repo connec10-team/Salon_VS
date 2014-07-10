@@ -1,0 +1,16 @@
+<% puts row.inspect%>
+<div class="col-sm-6 col-md-4">
+  <div class="thumbnail h100">
+    <%= link_to row[:url], target: "_blank" do%>
+      <h4 class="text-center"><%= row[:title] %>(<%= key %>)</h4>
+    <% end %>
+    <div class="caption">
+      <%= link_to row[:url], target: "_blank" do%>
+        <img src="<%= row[:img] %>" alt=".." class="img-thumbnail img-size">
+      <% end %>
+      <%= link_to row[:url], target: "_blank" do%>
+        <small class="text-description"><%= row[:description]%></small>
+      <% end %>
+    </div>
+  </div>
+</div>

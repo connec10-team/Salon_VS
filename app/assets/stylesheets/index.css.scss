@@ -1,0 +1,23 @@
+// Place all the styles related to the index controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com
+.img-thumbnail.img-size{
+  width: 100px;
+  height: 80px;
+  float: left;
+  margin-right: 10px;
+}
+
+.text-description{
+  float: left;
+  width: 155px;
+  height: 100px;
+//  overflow: auto;
+//  white-space: nowrap;
+  word-break: break-all;
+//  text-overflow: ellipsis;
+}
+
+.thumbnail.h100{
+  height: 160px;
+}

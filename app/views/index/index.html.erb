@@ -1,0 +1,22 @@
+<%= form_tag root_path(), method: :get, class: "form-horizontal" do %>
+  <div class="form-group">
+    <div class="input-group">
+      <span class="input-group-addon">
+        <i class="glyphicon glyphicon-search"></i>
+      </span>
+      <%= text_field_tag :word, params[:word], placeholder: "", class: "form-control" %>
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="submit">search</button>
+      </span>
+    </div>
+    <%= render partial: "state_list", locals:{params: params}%>
+  </div>
+<% end %>
+
+<div class="row">
+<% @scraping.each do |key, value|%>
+  <% value.each do |i, row|%>
+    <%= render partial: "list", locals:{row: row, key: key.to_s} %>
+  <% end %>
+<% end %>
+</div>
