@@ -34,7 +34,7 @@ module Scraping
         if area_code
           url.concat("&serviceAreaCd=#{area_code}")
         end
-        Rails.logger.info "request rakuten url: #{url}"
+        Rails.logger.info "request hotpepper url: #{url}"
         arr_list = Array.new
         begin
           html = Nokogiri::HTML(open(url))
@@ -49,9 +49,22 @@ module Scraping
             @list[key][:url] = value.css('h3').css('a').attribute('href').value
             @list[key][:img] = value.css('div').css('a').css('img').attribute('src').value
             @list[key][:description] = value.css('p[@class="shopCatchCopy"]').css('a').inner_text
+            menu = value.css('div[@class="fl w500"]').css('div[@class="bdLGrayT mT5"]').css('dd').first
+            if menu.present?
+              @list[key][:menu] = menu.inner_text
+              @list[key][:menu_url] = @list[key][:url]
+              name = @list[key][:menu]
+              idx = name.rindex(/￥|¥/)
+              if idx.blank?
+                @list[key][:price] = ""
+              else
+                price = name[idx+1, name.length]
+                @list[key][:price] = price.gsub(/[^0-9]/,"")
+              end
+            end
           end
           rescue Exception => e
-            Raisl.logger.error e.message
+            Rails.logger.error e.message
           end
       end
     end

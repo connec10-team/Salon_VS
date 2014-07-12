@@ -10,7 +10,7 @@
 
 .text-description{
   float: left;
-  width: 155px;
+  width: 132px;
   height: 100px;
 //  overflow: auto;
 //  white-space: nowrap;
@@ -19,5 +19,13 @@
 }
 
 .thumbnail.h100{
-  height: 160px;
+  height: 170px;
+}
+
+.w300{
+  width: 300px;
+  float: left;
+  margin-right: 10px;
+  border: 1px solid #bbbbbb;
+  border-radius: 4px;
 }

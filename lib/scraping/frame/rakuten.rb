@@ -32,6 +32,7 @@ module Scraping
         #   next unless i.present?
         #   arr_list.puts(i)
         # end
+        # vivivi情報がある時は取得がおかしくなる
         @list = Hash.new
         super(@list)
         url = "#{URL}/salonsearch/#{AREACODE[area_code]}"
@@ -51,6 +52,15 @@ module Scraping
             @list[key][:url] = URL + value.css('div[@class="baseBoxHeader"]').css('dl[@class="basedate"]').css('dt[@class="title"]').css('a').attribute('href').value
             @list[key][:img] = value.css('div[@class="baseBoxBody"]').css('div[@class="shopInfo"]').css('div[@class="shopImg"]').css('img').attribute('src').value
             @list[key][:description] = value.css('div[@class="baseBoxBody"]').css('p[@class="shopLead"]').css('a').inner_text
+            if value.css('div[@class="baseBoxBody"]').css('div[@class="shopBookMenu"]').css('div[@class="salonMenu"]').css('ul[@class="menuList"]').css('dd').css('a').blank?
+              @list[key][:menu] = ""
+              @list[key][:menu_url] = ""
+              @list[key][:price] = ""
+            else
+              @list[key][:menu] = value.css('div[@class="baseBoxBody"]').css('div[@class="shopBookMenu"]').css('div[@class="salonMenu"]').css('ul[@class="menuList"]').css('dd').css('a').first.inner_text
+              @list[key][:menu_url] = URL + value.css('div[@class="baseBoxBody"]').css('div[@class="shopBookMenu"]').css('div[@class="salonMenu"]').css('ul[@class="menuList"]').css('dd').css('a').attribute('href').value
+              @list[key][:price] = value.css('div[@class="baseBoxBody"]').css('div[@class="shopBookMenu"]').css('div[@class="salonMenu"]').css('ul[@class="menuList"]').css('dd[@class="price"]').first.inner_text.gsub(/[^0-9]/,"")
+            end
           end
         rescue Exception => e
           Rails.logger.error e.message
