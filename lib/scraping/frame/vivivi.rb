@@ -3,12 +3,12 @@ module Scraping
     class Vivivi
       include Scraping::Frame
       URL = "http://www.vi-vi-vi.com"
-      def http_open(key)
+      def http_open(key, area_code = nil)
         # b = a.xpath('//body/div/div/div[@class="pos_r clearfix"]/div[@class="clearfix"]/div[@id="shop_main"]')
         # b.children.css('div[@class="outer_shop_li"]').each do |i|
         #   next unless i.present?
         # end
-        url = "#{URL}/fword#{key}/"
+        url = "#{URL}/fword#{URI.escape(key)}/"
         Rails.logger.info "rewuest vivivi url: #{url}"
         @list = Hash.new
         arr_list = Array.new
@@ -26,6 +26,14 @@ module Scraping
             @list[key][:img] = value.css('div').css('div[@class="shop_list_inner clearfix"]').css('div[@class="bp_spc10 b_spc10 clearfix"]').css('div[@class="thumb_large"]').css('img').attribute('src').value
             #@list[key][:description] = value.css('div').css('div[@class="shop_list_inner clearfix"]').css('div[@class="bp_spc10 b_spc10 clearfix"]').css('div[@class="shop_txt b_spc5"]').inner_text
             @list[key][:description] = value.css('div').css('div[@class="shop_list_inner clearfix"]').css('div[@class="bp_spc10 b_spc10 clearfix"]').css('div[@class="shop_txt b_spc5"]').css('h5').inner_text
+            @list[key][:menu] = value.css('div[@class="shop_list_inner clearfix"]').css('div[@class="coupon"]').css('ul').css('span[@class="wd420"]').first.inner_text
+            @list[key][:menu_url] = @list[key][:url]
+            price = value.css('div[@class="shop_list_inner clearfix"]').css('div[@class="coupon"]').css('ul').css('span[@class="coupon_discount_price"]')
+            if price.blank?
+              @list[key][:price] = ""
+            else
+              @list[key][:price] = price.first.inner_text.gsub(/[^0-9]/,"")
+            end
           end
         rescue Exception => e
           Rails.logger.error e.message

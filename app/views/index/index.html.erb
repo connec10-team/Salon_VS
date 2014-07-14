@@ -13,107 +13,25 @@
   </div>
 <% end %>
 
+<% @scraping.each do |key, value|%>
 <div class="w300">
-<%# @scraping.each do |key, value|%>
-  <%# value.each do |i, row|%>
-    <%#= render partial: "list", locals:{row: row, key: key.to_s} %>
-  <%# end %>
-<%# end %>
-<div>
-  <p>aaaaaaaaaaa<p>
-</div>
-<div class="col-sm-6 col-md-4" style="width: 300px">
-  <div class="thumbnail h100">
-      <h4 class="text-center">test</h4>
-    <div class="caption">
-        <p>100000 aaaaaaaaaaaaaaaaa</p>
-        <img src="#" alt=".." class="img-thumbnail img-size">
-        <small class="text-description">ooooooooo</small>
-    </div>
+  <div align="center">
+    <% if key.to_s == "Hotpepper" %>
+      <% sitelogo = "/assets/hotpepper_beauty_logo.png" %>
+      <% siteurl = "http://beauty.hotpepper.jp/" %>
+    <% elsif key.to_s == "Rakuten" %>
+      <% sitelogo = "http://salon.rakuten.co.jp/cont/common/img/header/logo_salon_w89.gif" %>
+      <% siteurl = "http://salon.rakuten.co.jp/"%>
+    <% elsif key.to_s == "Vivivi" %>
+      <% sitelogo = "http://www.vi-vi-vi.com/images/common/base/logo.png" %>
+      <% siteurl = "http://www.vi-vi-vi.com/"%>
+    <% end %>
+    <%= link_to siteurl do %>
+      <img src="<%= sitelogo  %>" alt=".." class="sitelogo" align="center">
+    <% end %>
   </div>
+  <% value.each do |i, row|%>
+    <%= render partial: "list", locals:{row: row} %>
+  <% end %>
 </div>
-<div class="col-sm-6 col-md-4" style="width: 300px">
-  <div class="thumbnail h100">
-      <h4 class="text-center">test</h4>
-    <div class="caption">
-        <p>100000 aaaaaaaaaaaaaaaaa</p>
-        <img src="#" alt=".." class="img-thumbnail img-size">
-        <small class="text-description">ooooooooo</small>
-    </div>
-  </div>
-</div>
-<div class="col-sm-6 col-md-4" style="width: 300px">
-  <div class="thumbnail h100">
-      <h4 class="text-center">test</h4>
-    <div class="caption">
-        <p>100000 aaaaaaaaaaaaaaaaa</p>
-        <img src="#" alt=".." class="img-thumbnail img-size">
-        <small class="text-description">ooooooooo</small>
-    </div>
-  </div>
-</div>
-</div>
-<div class="w300">
-<div class="col-sm-6 col-md-4" style="width: 300px">
-  <div class="thumbnail h100">
-      <h4 class="text-center">test1</h4>
-    <div class="caption">
-        <p>100000 aaaaaaaaaaaaaaaaa</p>
-        <img src="#" alt=".." class="img-thumbnail img-size">
-        <small class="text-description">ooooooooo</small>
-    </div>
-  </div>
-</div>
-<div class="col-sm-6 col-md-4" style="width: 300px">
-  <div class="thumbnail h100">
-      <h4 class="text-center">test1</h4>
-    <div class="caption">
-        <p>100000 aaaaaaaaaaaaaaaaa</p>
-        <img src="#" alt=".." class="img-thumbnail img-size">
-        <small class="text-description">ooooooooo</small>
-    </div>
-  </div>
-</div>
-<div class="col-sm-6 col-md-4" style="width: 300px">
-  <div class="thumbnail h100">
-      <h4 class="text-center">test1</h4>
-    <div class="caption">
-        <p>100000 aaaaaaaaaaaaaaaaa</p>
-        <img src="#" alt=".." class="img-thumbnail img-size">
-        <small class="text-description">ooooooooo</small>
-    </div>
-  </div>
-</div>
-</div>
-<div class="w300">
-<div class="col-sm-6 col-md-4" style="width: 300px">
-  <div class="thumbnail h100">
-      <h4 class="text-center">test2</h4>
-    <div class="caption">
-        <p>100000 aaaaaaaaaaaaaaaaa</p>
-        <img src="#" alt=".." class="img-thumbnail img-size">
-        <small class="text-description">ooooooooo</small>
-    </div>
-  </div>
-</div>
-<div class="col-sm-6 col-md-4" style="width: 300px">
-  <div class="thumbnail h100">
-      <h4 class="text-center">test2</h4>
-    <div class="caption">
-        <p>100000 aaaaaaaaaaaaaaaaa</p>
-        <img src="#" alt=".." class="img-thumbnail img-size">
-        <small class="text-description">ooooooooo</small>
-    </div>
-  </div>
-</div>
-<div class="col-sm-6 col-md-4" style="width: 300px">
-  <div class="thumbnail h100">
-      <h4 class="text-center">test2</h4>
-    <div class="caption">
-        <p>100000 aaaaaaaaaaaaaaaaa</p>
-        <img src="#" alt=".." class="img-thumbnail img-size">
-        <small class="text-description">ooooooooo</small>
-    </div>
-  </div>
-</div>
-</div>
+<% end %>

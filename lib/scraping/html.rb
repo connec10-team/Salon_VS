@@ -3,7 +3,7 @@ module Scraping
     @search_module = Hash.new
     def initialize
   #    @search_module = {:rakuten => Rakuten.new, :hot = > Hotpepper.new, :kamimado => Kamimado.new}
-      @search_module = {:hotpepper => Scraping::Frame::Hotpepper.new, :Rakuten => Scraping::Frame::Rakuten.new}#, :Vivivi => Vivivi.new}
+      @search_module = {:Hotpepper => Scraping::Frame::Hotpepper.new, :Rakuten => Scraping::Frame::Rakuten.new, :Vivivi => Scraping::Frame::Vivivi.new}
     end
 
     def open(key, area)

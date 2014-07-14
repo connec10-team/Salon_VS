@@ -30,7 +30,7 @@ module Scraping
         #
         @list = Hash.new
         super(@list)
-        url = "#{URL}#{key}"
+        url = "#{URL}#{URI.escape(key)}"
         if area_code
           url.concat("&serviceAreaCd=#{area_code}")
         end
@@ -61,6 +61,10 @@ module Scraping
                 price = name[idx+1, name.length]
                 @list[key][:price] = price.gsub(/[^0-9]/,"")
               end
+            else
+              @list[key][:menu] = ""
+              @list[key][:menu_url] = ""
+              @list[key][:price] = ""
             end
           end
           rescue Exception => e

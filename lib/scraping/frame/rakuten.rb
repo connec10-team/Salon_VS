@@ -36,7 +36,7 @@ module Scraping
         @list = Hash.new
         super(@list)
         url = "#{URL}/salonsearch/#{AREACODE[area_code]}"
-        url.concat("?w[f_w]=#{key}")
+        url.concat("?w[f_w]=#{URI.escape(key)}")
         Rails.logger.info "request rakuten url: #{url}"
         arr_list = Array.new
         begin
