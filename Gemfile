@@ -32,6 +32,10 @@ group :doc do
   gem 'sdoc', require: false
 end
 
+group :development, :test do
+  gem 'pry'
+end
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
 
@@ -45,4 +49,3 @@ end
 # gem 'debugger', group: [:development, :test]
 gem 'nokogiri'
 gem 'bootstrap-sass-rails'
-gem 'pry'

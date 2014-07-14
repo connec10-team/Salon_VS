@@ -4,7 +4,7 @@
       <span class="input-group-addon">
         <i class="glyphicon glyphicon-search"></i>
       </span>
-      <%= text_field_tag :word, params[:word], placeholder: "", class: "form-control" %>
+      <%= text_field_tag :word, params[:word], placeholder: "店舗名やフリーワードなど", class: "form-control" %>
       <span class="input-group-btn">
         <button class="btn btn-default" type="submit">search</button>
       </span>
@@ -26,7 +26,7 @@
       <% sitelogo = "http://www.vi-vi-vi.com/images/common/base/logo.png" %>
       <% siteurl = "http://www.vi-vi-vi.com/"%>
     <% end %>
-    <%= link_to siteurl do %>
+    <%= link_to siteurl, target: ["_blank"] do %>
       <img src="<%= sitelogo  %>" alt=".." class="sitelogo" align="center">
     <% end %>
   </div>
