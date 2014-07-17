@@ -9,6 +9,7 @@ module Scraping
     def open(key, area)
       @search_module.each_value do |model|
         model.http_open(key, area)
+        model.title_search(key)
       end
     end
 

@@ -49,27 +49,70 @@ module Scraping
             @list[key][:url] = value.css('h3').css('a').attribute('href').value
             @list[key][:img] = value.css('div').css('a').css('img').attribute('src').value
             @list[key][:description] = value.css('p[@class="shopCatchCopy"]').css('a').inner_text
-            menu = value.css('div[@class="fl w500"]').css('div[@class="bdLGrayT mT5"]').css('dd').first
-            if menu.present?
-              @list[key][:menu] = menu.inner_text
-              @list[key][:menu_url] = @list[key][:url]
-              name = @list[key][:menu]
-              idx = name.rindex(/￥|¥/)
-              if idx.blank?
-                @list[key][:price] = ""
-              else
-                price = name[idx+1, name.length]
-                @list[key][:price] = price.gsub(/[^0-9]/,"")
-              end
-            else
-              @list[key][:menu] = ""
-              @list[key][:menu_url] = ""
-              @list[key][:price] = ""
-            end
+            menu = value.css('div[@class="fl w500"]').css('div[@class="bdLGrayT mT5"]').css('dd')
+            set_menu(key, menu)
           end
-          rescue Exception => e
-            Rails.logger.error e.message
+        rescue Exception => e
+          Rails.logger.error e.message
+        end
+      end
+
+      def set_menu(key, value)
+        cache = extraction(value)
+        menu = menu_selection(cache)
+        @list[key][:menus] = menu
+      end
+
+      def menu_selection(cache)
+        cut = Array.new
+        normal = Array.new
+        cache.each do |i|
+          if i[:title].index(/カット/)
+            i[:type] = :cut
+            cut.push(i)
+          else
+            i[:type] = :normal
+            normal.push(i)
           end
+        end
+        count = max_count - cut.size
+        if count > 0
+          1.upto(count) do |i|
+            cut.push(normal[i-1])
+          end
+        end
+        cut
+      end
+
+      def extraction(value)
+        cache = Array.new
+        value.each do |i|
+          h = Hash.new
+          h[:title] = i.inner_text
+          idx = h[:title].rindex(/￥|¥/)
+          if idx.blank?
+            h[:price] = ""
+          else
+            h[:price] = h[:title][idx+1, h[:title].length].gsub(/[^0-9]/,"")
+          end
+          cache.push(h)
+        end
+        price_sort(cache)
+      end
+
+      def price_sort(value)
+        no_price = Array.new
+        price = Array.new
+        value.each do |i|
+          if i[:price].blank?
+            no_price.push(i)
+          else
+            price.push(i)
+          end
+        end
+        data = price.sort_by {|i| i[:price].to_i}
+        no_price.each {|v| data[data.size] = v}
+        data
       end
     end
   end
