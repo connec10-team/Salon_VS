@@ -20,14 +20,14 @@
       <% sitelogo = "/assets/hotpepper_beauty_logo.png" %>
       <% siteurl = "http://beauty.hotpepper.jp/" %>
     <% elsif key.to_s == "Rakuten" %>
-      <% sitelogo = "http://salon.rakuten.co.jp/cont/common/img/header/logo_salon_w89.gif" %>
+      <% sitelogo = "/assets/rakuten_salon_logo.jpeg" %>
       <% siteurl = "http://salon.rakuten.co.jp/"%>
     <% elsif key.to_s == "Vivivi" %>
-      <% sitelogo = "http://www.vi-vi-vi.com/images/common/base/logo.png" %>
+      <% sitelogo = "/assets/vivivi_logo.png" %>
       <% siteurl = "http://www.vi-vi-vi.com/"%>
     <% end %>
     <%= link_to siteurl, target: ["_blank"] do %>
-      <img src="<%= sitelogo  %>" alt=".." class="sitelogo" align="center">
+      <img src="<%= sitelogo  %>" alt=".." class="sitelogo1" align="center">
     <% end %>
   </div>
   <% value.each do |i, row|%>

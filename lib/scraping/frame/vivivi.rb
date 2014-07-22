@@ -8,7 +8,7 @@ module Scraping
         # b.children.css('div[@class="outer_shop_li"]').each do |i|
         #   next unless i.present?
         # end
-        url = "#{URL}/fword#{URI.escape(key)}/"
+        url = "#{URL}/fword#{CGI.escape(key)}/"
         Rails.logger.info "rewuest vivivi url: #{url}"
         @list = Hash.new
         arr_list = Array.new

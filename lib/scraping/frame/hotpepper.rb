@@ -30,7 +30,7 @@ module Scraping
         #
         @list = Hash.new
         super(@list)
-        url = "#{URL}#{URI.escape(key)}"
+        url = "#{URL}#{CGI.escape(key)}"
         if area_code
           url.concat("&serviceAreaCd=#{area_code}")
         end
