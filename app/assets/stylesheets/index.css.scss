@@ -12,10 +12,7 @@
   float: left;
   width: 132px;
   height: 100px;
-//  overflow: auto;
-//  white-space: nowrap;
   word-break: break-all;
-//  text-overflow: ellipsis;
 }
 
 .thumbnail.h100{
@@ -31,8 +28,19 @@
 }
 
 .sitelogo{
-  width: 100px;
-  height: 50px;
+  height: 95px;
   margin-top: 5px;
   margin-bottom: 5px;
 }
+
+.helpsitelogo{
+  width: 100px;
+  height: 70px;
+  float: left;
+  margin-left: 10px;
+}
+
+.h100{
+  height: 100px;
+}
+

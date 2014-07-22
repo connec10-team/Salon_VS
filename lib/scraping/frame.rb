@@ -32,6 +32,7 @@ module Scraping
       data = Hash.new
       @list.each do |k,v|
         if v[:menus].blank?
+        elsif v[:menus][0].blank?
         elsif v[:menus][0][:price].blank?
           no_price.push(v)
         else
