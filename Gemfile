@@ -36,6 +36,9 @@ group :development, :test do
   gem 'pry'
 end
 
+group :production do
+  gem 'unicorn'
+end
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
 

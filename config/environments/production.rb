@@ -52,6 +52,7 @@ Scrapingtest::Application.configure do
 
   # Use a different logger for distributed setups.
   # config.logger = ActiveSupport::TaggedLogging.new(SyslogLogger.new)
+  config.logger = ActiveSupport::Logger.new("log/production.log", 5, 10*1024*1024)
 
   # Use a different cache store in production.
   # config.cache_store = :mem_cache_store
